@@ -1,0 +1,51 @@
+.pomodoro {
+  background-color: $light;
+  flex-grow: 1;
+  max-height: 510px;
+  &__header {
+    background-color: $smoke;
+    padding: 19px 40px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px;
+  }
+  &__buttons {
+    display: flex;
+    gap: 25px;
+  }
+  &__time {
+    font-size: 150px;
+    line-height: 179px;
+    font-weight: 200;
+    position: relative;
+  }
+  .time-button {
+    position: absolute;
+    right: -75px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: url('/plus.svg') no-repeat center;
+    background-color: $smoke;
+    border-radius: 100%;
+    font-size: 0;
+    transition: all .3s ease-in-out;
+    &:hover {
+      background-color: $dark-green;
+    }
+  }
+  &__descr {
+    margin-bottom: 32px;
+  }
+  .grey {
+    color: $grey;
+  }
+}

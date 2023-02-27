@@ -21,4 +21,9 @@
     color: #ffffff;
     background-color: $red;
   }
+  &.disabled {
+    color: $smoke;
+    border-color: $smoke;
+    pointer-events: none;
+  }
 }

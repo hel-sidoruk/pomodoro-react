@@ -1,6 +1,5 @@
 import React from 'react';
-import { AddTaskForm } from '../components/Home/AddTaskForm';
-import { TasksList } from '../components/Home/TasksList';
+import { AddTaskForm, TasksList, Pomodoro } from '../components/Home';
 
 export const Home = () => {
   return (
@@ -23,6 +22,7 @@ export const Home = () => {
           <AddTaskForm />
           <TasksList />
         </div>
+        <Pomodoro />
       </div>
     </div>
   );
