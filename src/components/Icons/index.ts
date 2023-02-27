@@ -4,3 +4,8 @@ export * from './PlusIcon';
 export * from './MinusIcon';
 export * from './EditIcon';
 export * from './DeleteIcon';
+export * from './TomatoIconSmile';
+export * from './FocusIcon';
+export * from './AlarmIcon';
+export * from './StopIcon';
+export * from './ArrowIcon';
