@@ -1,10 +1,17 @@
+import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
+import useActions from '../../hooks/useActions';
 
 export const AddTaskForm = () => {
   const [value, setValue] = useState('');
+  const { addTask } = useActions();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-  const onSubmit = (e: React.FormEvent) => e.preventDefault();
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addTask({ id: nanoid(), text: value, count: 1 });
+    setValue('');
+  };
 
   return (
     <form className="add-form" onSubmit={onSubmit}>

@@ -6,7 +6,7 @@ export const Home = () => {
     <div className="home">
       <div className="container">
         <div className="home__content">
-          <h2 className="home__title">Ура! Теперь можно начать работать:</h2>
+          <h2 className="title">Ура! Теперь можно начать работать:</h2>
           <ul className="home__list">
             <li className="home__list-item">
               Выберите категорию и напишите название текущей задачи
