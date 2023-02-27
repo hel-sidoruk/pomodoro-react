@@ -5,6 +5,7 @@ export * from './MinusIcon';
 export * from './EditIcon';
 export * from './DeleteIcon';
 export * from './TomatoIconSmile';
+export * from './TomatoIcon';
 export * from './FocusIcon';
 export * from './AlarmIcon';
 export * from './StopIcon';

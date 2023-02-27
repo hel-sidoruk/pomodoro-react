@@ -1,12 +1,12 @@
 import React from 'react';
 
-export const FocusIcon = () => {
+export const FocusIcon = ({ fill }: { fill?: string }) => {
   return (
     <svg
       width="115"
       height="115"
       viewBox="0 0 115 115"
-      stroke="#C4C4C4"
+      stroke={fill || '#C4C4C4'}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
