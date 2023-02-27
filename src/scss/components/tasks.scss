@@ -1,0 +1,88 @@
+.tasks {
+  max-width: 370px;
+  &__list {
+    margin-bottom: 20px;
+    border-top: 1px solid $light-grey;
+    border-bottom: 1px solid $light-grey;
+  }
+  &__item {
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    &:not(:last-child) {
+      border-bottom: 1px solid $light-grey;
+    }
+  }
+  &__descr {
+    font-weight: 300;
+  }
+  &__item-count {
+    border: 1px solid $smoke;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    border-radius: 100%;
+  }
+  &__time {
+    color: $grey;
+  }
+  &__button {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background: url('/dots.svg') no-repeat center;
+    background-size: 24px 5px;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    font-size: 0;
+    &:hover,
+    &.active {
+      background-color: $light;
+    }
+  }
+  &__dropdown {
+    position: relative;
+    margin-left: auto;
+  }
+  &__dropdown-list {
+    position: absolute;
+    width: 165px;
+    top: calc(100% + 5px);
+    left: -70px;
+    color: $grey;
+    background-color: #fff;
+    border: 1px solid $smoke;
+    padding: 6px 0;
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
+    transition: all .2s ease-in-out;
+    z-index: 20;
+    &.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+  &__dropdown-item {
+    display: flex;
+    gap: 10px;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    padding: 9px 14px;
+    line-height: 17px;
+    &:hover {
+      background-color: $light;
+    }
+    &.disabled {
+      pointer-events: none;
+      svg {
+        fill: $smoke;
+      }
+    }
+  }
+}

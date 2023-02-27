@@ -1,5 +1,6 @@
 import React from 'react';
 import { AddTaskForm } from '../components/Home/AddTaskForm';
+import { TasksList } from '../components/Home/TasksList';
 
 export const Home = () => {
   return (
@@ -20,6 +21,7 @@ export const Home = () => {
             </li>
           </ul>
           <AddTaskForm />
+          <TasksList />
         </div>
       </div>
     </div>

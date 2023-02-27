@@ -1,13 +1,16 @@
 .add-form {
+  margin-bottom: 25px;
   &__input {
     display: block;
+    font-weight: 300;
     margin-bottom: 25px;
     padding: 19px 15px;
     background-color: $light;
     font-size: 16px;
     line-height: 17px;
     color: $dark;
-    width: 370px;
+    max-width: 370px;
+    width: 100%;
     outline: none;
     transition: background-color .3s ease-in-out;
     &:hover {
