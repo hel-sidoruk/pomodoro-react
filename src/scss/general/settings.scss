@@ -16,10 +16,7 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   min-width: 320px;
-  font-family: 'Lato', sans-serif;
-  background-color: var(--bg-color);
-  font-size: 14px;
-  @include scrollBar(12px);
+  font-family: 'SFDisplay', sans-serif;
 }
 
 button {
