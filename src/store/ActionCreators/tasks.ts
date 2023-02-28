@@ -16,3 +16,12 @@ export function deleteTask(id: string): ThunkActionType {
     dispatch({ type: TasksActionTypes.DELETE_TASK, payload: { tasks: filteredTasks } });
   };
 }
+
+export function editTaskTime(id: string, time: number): ThunkActionType {
+  return async (dispatch: Dispatch<TasksAction>, getState) => {
+    const { tasks } = getState().tasks;
+    const task = tasks.find((el) => el.id === id);
+    if (task) task.count = time;
+    dispatch({ type: TasksActionTypes.DELETE_TASK, payload: { tasks } });
+  };
+}

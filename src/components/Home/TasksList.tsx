@@ -3,16 +3,16 @@ import useTypedSelector from '../../hooks/useTypedSelector';
 import { TasksDropdown } from './TasksDropdown';
 
 export const TasksList = () => {
-  const [openedDropdown, setOpenedDropdown] = useState<string | null>(null);
+  const [opened, setOpened] = useState<string | null>(null);
   const { tasks } = useTypedSelector((state) => state.tasks);
 
-  const handler = (option: string | null) => setOpenedDropdown(option);
+  const handler = (option: string | null) => setOpened(option);
   const total = tasks.reduce((a, b) => a + b.count, 0) * 25;
   const hours = Math.floor(total / 60);
   const minutes = total - hours * 60;
 
   useEffect(() => {
-    const close = () => setOpenedDropdown(null);
+    const close = () => setOpened(null);
     document.body.addEventListener('click', close);
     return () => document.body.removeEventListener('click', close);
   }, []);
@@ -26,7 +26,7 @@ export const TasksList = () => {
               <li key={id} className="tasks__item">
                 <div className="tasks__item-count">{count}</div>
                 <p className="tasks__descr">{text}</p>
-                <TasksDropdown isOpened={openedDropdown === id} handler={handler} id={id} />
+                <TasksDropdown isOpened={opened === id} handler={handler} id={id} count={count} />
               </li>
             ))}
           </ul>
