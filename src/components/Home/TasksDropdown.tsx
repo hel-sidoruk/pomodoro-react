@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Icons from '../Icons';
+import { DeleteTaskButton } from './DeleteTaskButton';
 
 interface Props {
   id: string;
@@ -27,9 +28,7 @@ export const TasksDropdown = ({ id, isOpened, handler }: Props) => {
         <li className="tasks__dropdown-item">
           <Icons.EditIcon /> Редактировать
         </li>
-        <li className="tasks__dropdown-item">
-          <Icons.DeleteIcon /> Удалить
-        </li>
+        <DeleteTaskButton id={id} />
       </ul>
     </div>
   );

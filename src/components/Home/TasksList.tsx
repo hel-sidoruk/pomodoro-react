@@ -7,6 +7,9 @@ export const TasksList = () => {
   const { tasks } = useTypedSelector((state) => state.tasks);
 
   const handler = (option: string | null) => setOpenedDropdown(option);
+  const total = tasks.reduce((a, b) => a + b.count, 0) * 25;
+  const hours = Math.floor(total / 60);
+  const minutes = total - hours * 60;
 
   useEffect(() => {
     const close = () => setOpenedDropdown(null);
@@ -27,7 +30,10 @@ export const TasksList = () => {
               </li>
             ))}
           </ul>
-          <div className="tasks__time">25 мин</div>
+          <div className="tasks__time">
+            {hours ? `${hours} ч ` : ''}
+            {minutes} мин
+          </div>
         </>
       ) : null}
     </div>

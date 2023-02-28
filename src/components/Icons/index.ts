@@ -10,3 +10,4 @@ export * from './FocusIcon';
 export * from './AlarmIcon';
 export * from './StopIcon';
 export * from './ArrowIcon';
+export * from './CrossIcon';
