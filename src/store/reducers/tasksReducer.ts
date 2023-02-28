@@ -6,9 +6,7 @@ const initialState: TasksState = {
 
 export const tasksReducer = (state = initialState, action: TasksAction) => {
   switch (action.type) {
-    case TasksActionTypes.ADD_TASK:
-      return { ...state, tasks: action.payload.tasks };
-    case TasksActionTypes.DELETE_TASK:
+    case TasksActionTypes.UPDATE_TASKS:
       return { ...state, tasks: action.payload.tasks };
     default:
       return state;

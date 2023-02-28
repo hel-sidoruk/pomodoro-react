@@ -85,4 +85,12 @@
       }
     }
   }
+  &__input {
+    font-size: inherit;
+    padding: 4px 5px;
+    background-color: $light;
+    display: block;
+    font-weight: 300;
+    width: fit-content;
+  }
 }

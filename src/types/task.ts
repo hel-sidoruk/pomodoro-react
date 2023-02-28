@@ -7,15 +7,9 @@ export interface TasksState {
   tasks: ITask[];
 }
 export enum TasksActionTypes {
-  ADD_TASK = 'ADD_TASK',
-  DELETE_TASK = 'DELETE_TASK',
+  UPDATE_TASKS = 'UPDATE_TASKS',
 }
-interface AddTask {
-  type: TasksActionTypes.ADD_TASK;
+export interface TasksAction {
+  type: TasksActionTypes.UPDATE_TASKS;
   payload: { tasks: ITask[] };
 }
-interface DeleteTask {
-  type: TasksActionTypes.DELETE_TASK;
-  payload: { tasks: ITask[] };
-}
-export type TasksAction = AddTask | DeleteTask;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useTypedSelector from '../../hooks/useTypedSelector';
-import { TasksDropdown } from './TasksDropdown';
+import { TaskItem } from './TaskItem';
 
 export const TasksList = () => {
   const [opened, setOpened] = useState<string | null>(null);
@@ -22,12 +22,8 @@ export const TasksList = () => {
       {tasks.length ? (
         <>
           <ul className="tasks__list">
-            {tasks.map(({ id, text, count }) => (
-              <li key={id} className="tasks__item">
-                <div className="tasks__item-count">{count}</div>
-                <p className="tasks__descr">{text}</p>
-                <TasksDropdown isOpened={opened === id} handler={handler} id={id} count={count} />
-              </li>
+            {tasks.map((task) => (
+              <TaskItem key={task.id} task={task} handler={handler} opened={opened} />
             ))}
           </ul>
           <div className="tasks__time">
