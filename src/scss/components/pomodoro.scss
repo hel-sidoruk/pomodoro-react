@@ -59,9 +59,14 @@
   .grey {
     color: $grey;
   }
-  &.started {
+  &.red {
     .pomodoro__header {
       background-color: $red;
+    }
+  }
+  &.green {
+    .pomodoro__header {
+      background-color: $green;
     }
   }
 }
