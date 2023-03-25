@@ -3,14 +3,13 @@ import useActions from './useActions';
 import useTypedSelector from './useTypedSelector';
 
 export function useTimer() {
-  const { isTaskTime, taskTime, breakTime, longBreakTime, pomodoros, breaks } = useTypedSelector(
-    (state) => state.pomodoro
-  );
+  const { isTaskTime, pomodoros, breaks } = useTypedSelector((state) => state.pomodoro);
+  const { taskTime, breakTime, longBreakTime } = useTypedSelector((state) => state.settings);
+  const { tasks } = useTypedSelector((state) => state.tasks);
+
   const [currentTime, setCurrentTime] = useState(taskTime);
   const [isStarted, setIsStarted] = useState(false);
   const [timer, setTimer] = useState<ReturnType<typeof setInterval> | null>(null);
-
-  const { tasks } = useTypedSelector((state) => state.tasks);
 
   const audio = new Audio('/alert.wav');
 

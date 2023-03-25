@@ -1,9 +1,6 @@
 export interface PomodoroState {
   isTaskTime: boolean;
   isInProcess: boolean;
-  taskTime: number;
-  breakTime: number;
-  longBreakTime: number;
   pomodoros: number;
   breaks: number;
 }

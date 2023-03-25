@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTimer } from '../../hooks/useTimer';
 import useTypedSelector from '../../hooks/useTypedSelector';
+import { formatTime } from '../../utils/formatTime';
 
 export const Pomodoro = () => {
   const [currentTime, isStarted, start, pause, reset] = useTimer();
@@ -12,9 +13,6 @@ export const Pomodoro = () => {
 
   const handleTimer = () => (isStarted ? pause() : start());
   const currentTask = tasks.length ? tasks[pomodoros - 1] : null;
-
-  const min = Math.floor(currentTime / 60);
-  const sec = currentTime % 60;
 
   return (
     <div className={`pomodoro ${isInProcess ? (isTaskTime ? 'red' : 'green') : ''}`}>
@@ -29,7 +27,7 @@ export const Pomodoro = () => {
       {currentTask ? (
         <div className="pomodoro__body">
           <div className="pomodoro__time">
-            {`${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`}
+            {formatTime(currentTime)}
             <button className="time-button">Добавить время</button>
           </div>
           <p className="pomodoro__descr">
