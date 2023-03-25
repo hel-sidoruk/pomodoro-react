@@ -13,6 +13,9 @@ export const Pomodoro = () => {
   const handleTimer = () => (isStarted ? pause() : start());
   const currentTask = tasks.length ? tasks[pomodoros - 1] : null;
 
+  const min = Math.floor(currentTime / 60);
+  const sec = currentTime % 60;
+
   return (
     <div className={`pomodoro ${isInProcess ? (isTaskTime ? 'red' : 'green') : ''}`}>
       <div className="pomodoro__header">
@@ -26,7 +29,7 @@ export const Pomodoro = () => {
       {currentTask ? (
         <div className="pomodoro__body">
           <div className="pomodoro__time">
-            {currentTime}
+            {`${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`}
             <button className="time-button">Добавить время</button>
           </div>
           <p className="pomodoro__descr">

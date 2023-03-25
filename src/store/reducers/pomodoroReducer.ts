@@ -3,7 +3,7 @@ import { PomodoroAction, PomodoroActionTypes, PomodoroState } from '../../types/
 const initialState: PomodoroState = {
   isTaskTime: true,
   isInProcess: false,
-  taskTime: 10,
+  taskTime: 100,
   breakTime: 5,
   longBreakTime: 8,
   pomodoros: 1,
