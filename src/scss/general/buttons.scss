@@ -28,6 +28,7 @@
   &:hover {
     color: #ffffff;
     background-color: $red;
+    border-color: $red;
   }
   &.disabled {
     color: $smoke;
