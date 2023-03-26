@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import useActions from '../../hooks/useActions';
+import { useAppDispatch } from '../../store';
+import { deleteTask } from '../../store/slices/tasksSlice';
 import { DeleteIcon } from '../Icons';
 import { Modal } from '../UI/Modal';
 
 export const DeleteTaskButton = ({ id }: { id: string }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { deleteTask } = useActions();
+  const dispatch = useAppDispatch();
 
   const close = () => setIsModalOpen(false);
   const open = () => setIsModalOpen(true);
-  const onConfirm = () => deleteTask(id);
+  const onConfirm = () => dispatch(deleteTask(id));
 
   return (
     <>

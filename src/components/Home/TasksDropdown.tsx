@@ -1,5 +1,6 @@
 import React from 'react';
-import useActions from '../../hooks/useActions';
+import { useAppDispatch } from '../../store';
+import { editTaskTime } from '../../store/slices/tasksSlice';
 import { ITask } from '../../types/task';
 import * as Icons from '../Icons';
 import { DeleteTaskButton } from './DeleteTaskButton';
@@ -12,13 +13,13 @@ interface Props {
 }
 
 export const TasksDropdown = ({ task, isOpened, handler, edit }: Props) => {
-  const { editTaskTime } = useActions();
+  const dispatch = useAppDispatch();
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     handler(isOpened ? null : task.id);
   };
-  const increase = () => editTaskTime(task.id, task.count + 1);
-  const decrease = () => editTaskTime(task.id, task.count - 1);
+  const increase = () => dispatch(editTaskTime({ id: task.id, time: task.count + 1 }));
+  const decrease = () => dispatch(editTaskTime({ id: task.id, time: task.count - 1 }));
 
   return (
     <div className="tasks__dropdown">

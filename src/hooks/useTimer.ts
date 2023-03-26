@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react';
-import useActions from './useActions';
+import { useAppDispatch } from '../store';
+import {
+  addBreak,
+  addPomodoro,
+  switchProcess,
+  switchTaskTime,
+} from '../store/slices/pomodoroSlice';
+import { addWorkTime } from '../store/slices/statsSlice';
+import { markAsDone } from '../store/slices/tasksSlice';
 import useTypedSelector from './useTypedSelector';
 
 export function useTimer() {
@@ -9,6 +17,8 @@ export function useTimer() {
   );
   const { tasks } = useTypedSelector((state) => state.tasks);
 
+  const dispatch = useAppDispatch();
+
   const [currentTime, setCurrentTime] = useState(taskTime * 60);
   const [isStarted, setIsStarted] = useState(false);
   const [timer, setTimer] = useState<ReturnType<typeof setInterval> | null>(null);
@@ -16,13 +26,10 @@ export function useTimer() {
   const taskAudio = new Audio('/alert.wav');
   const breakAudio = new Audio('/break.mp3');
 
-  const { switchTaskTime, switchProcess, addPomodoro, addBreak, markAsDone, addWorkTime } =
-    useActions();
-
   const start = () => {
     setIsStarted(true);
     setTimer(setInterval(tick, 1000));
-    switchProcess(true);
+    dispatch(switchProcess(true));
   };
 
   const pause = () => {
@@ -32,14 +39,27 @@ export function useTimer() {
 
   const startTask = () => {
     setCurrentTime(taskTime * 60);
-    switchTaskTime();
-    addPomodoro();
+    dispatch(switchTaskTime());
+    dispatch(addPomodoro());
   };
 
   const startBreak = () => {
     setCurrentTime(breaks === longBreakFrequency ? longBreakTime * 60 : breakTime * 60);
-    switchTaskTime();
-    addBreak();
+    dispatch(switchTaskTime());
+    dispatch(addBreak());
+  };
+
+  const skipTask = () => {
+    dispatch(markAsDone({ id: tasks[pomodoros - 1].id }));
+    dispatch(addWorkTime((taskTime * 60 - currentTime) / 60));
+    if (pomodoros === tasks.length) {
+      taskAudio.play();
+      pause();
+      switchProcess(false);
+    } else {
+      startBreak();
+      start();
+    }
   };
 
   const reset = () => {
@@ -50,13 +70,13 @@ export function useTimer() {
 
   const finish = () => {
     if (isTaskTime) {
-      markAsDone(tasks[pomodoros - 1].id);
-      addWorkTime(taskTime);
+      dispatch(markAsDone({ id: tasks[pomodoros - 1].id }));
+      dispatch(addWorkTime(taskTime));
     }
     if (pomodoros === tasks.length) {
       taskAudio.play();
       pause();
-      switchProcess(false);
+      dispatch(switchProcess(false));
     } else {
       if (isTaskTime) {
         taskAudio.play();
@@ -76,5 +96,5 @@ export function useTimer() {
     setCurrentTime((time) => (time ? time - 1 : 0));
   };
 
-  return [currentTime, isStarted, start, pause, reset] as const;
+  return [currentTime, isStarted, start, pause, reset, skipTask] as const;
 }

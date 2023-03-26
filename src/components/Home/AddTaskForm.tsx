@@ -1,16 +1,17 @@
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
-import useActions from '../../hooks/useActions';
+import { useAppDispatch } from '../../store';
+import { addTask } from '../../store/slices/tasksSlice';
 
 export const AddTaskForm = () => {
   const [value, setValue] = useState('');
-  const { addTask } = useActions();
+  const dispatch = useAppDispatch();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!value) return;
-    addTask({ id: nanoid(), text: value, count: 1, done: false });
+    dispatch(addTask({ id: nanoid(), text: value, count: 1, done: false }));
     setValue('');
   };
 

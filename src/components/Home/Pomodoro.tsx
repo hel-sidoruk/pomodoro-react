@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import useActions from '../../hooks/useActions';
 import { useTimer } from '../../hooks/useTimer';
 import useTypedSelector from '../../hooks/useTypedSelector';
+import { useAppDispatch } from '../../store';
+import { addPauseTime } from '../../store/slices/statsSlice';
 import { formatTime } from '../../utils/formatTime';
 
 export const Pomodoro = () => {
-  const [currentTime, isStarted, start, pause, reset] = useTimer();
+  const [currentTime, isStarted, start, pause, reset, skipTask] = useTimer();
+
+  const dispatch = useAppDispatch();
 
   const { tasks } = useTypedSelector((state) => state.tasks);
   const { isTaskTime, isInProcess, pomodoros, breaks } = useTypedSelector(
     (state) => state.pomodoro
   );
-
-  const { addPauseTime } = useActions();
 
   const [pauseTime, setPauseTime] = useState<number | null>(null);
 
@@ -26,7 +27,7 @@ export const Pomodoro = () => {
       setPauseTime(Date.now());
     } else {
       start();
-      if (pauseTime) addPauseTime(Math.floor((Date.now() - pauseTime) / 1000));
+      if (pauseTime) dispatch(addPauseTime(Math.floor((Date.now() - pauseTime) / 1000)));
     }
   };
   const currentTask = tasks.length ? tasks[pomodoros - 1] : null;
@@ -36,14 +37,7 @@ export const Pomodoro = () => {
   if (isAllDone)
     return (
       <div className={`pomodoro ${isInProcess ? (isTaskTime ? 'red' : 'green') : ''}`}>
-        <div className="pomodoro__header">
-          {currentTask && <span>{currentTask.text}</span>}
-          {currentTask && (
-            <span>
-              {isTaskTime ? 'Помидор' : 'Перерыв'} {isTaskTime ? pomodoros : breaks}
-            </span>
-          )}
-        </div>
+        <div className="pomodoro__header"></div>
         <p className="pomodoro__default">{'Все задачи выполнены!'}</p>
       </div>
     );
@@ -74,9 +68,18 @@ export const Pomodoro = () => {
                 ? 'Продолжить'
                 : 'Старт'}
             </button>
-            <button className={`btn btn-outlined ${isInProcess ? '' : 'disabled'}`} onClick={reset}>
-              {!isStarted && isInProcess ? 'Сделано' : 'Стоп'}
-            </button>
+            {!isStarted && isInProcess ? (
+              <button className="btn btn-outlined" onClick={skipTask}>
+                Сделано
+              </button>
+            ) : (
+              <button
+                className={`btn btn-outlined ${isInProcess ? '' : 'disabled'}`}
+                onClick={reset}
+              >
+                Стоп
+              </button>
+            )}
           </div>
         </div>
       ) : (

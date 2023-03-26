@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useActions from '../../hooks/useActions';
+import { useAppDispatch } from '../../store';
+import { updateTaskText } from '../../store/slices/tasksSlice';
 import { ITask } from '../../types/task';
 import { TasksDropdown } from './TasksDropdown';
 
@@ -12,15 +14,16 @@ interface Props {
 export const TaskItem = ({ task, opened, handler }: Props) => {
   const [isEdited, setIsEdited] = useState(false);
   const [text, setText] = useState(task.text);
-  const { updateTaskText } = useActions();
   const ref = useRef<HTMLInputElement>(null);
+
+  const dispatch = useAppDispatch();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value);
   const edit = () => setIsEdited(true);
   const close = () => setIsEdited(false);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    updateTaskText(task.id, text);
+    dispatch(updateTaskText({ id: task.id, text }));
     close();
   };
 
