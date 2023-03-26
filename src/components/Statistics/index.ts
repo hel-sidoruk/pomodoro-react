@@ -4,3 +4,4 @@ export * from './StopsBlock';
 export * from './FocusBlock';
 export * from './PomodorosBlock';
 export * from './WorkInfoBlock';
+export * from './BarChart';
