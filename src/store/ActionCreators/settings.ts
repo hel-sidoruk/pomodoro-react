@@ -15,3 +15,8 @@ export const changeLongBreak: ActionCreator<SettingsAction> = (minutes: number) 
   type: SettingsActionTypes.CHANGE_LONG_BREAK,
   longBreakTime: minutes * 60,
 });
+
+export const changeLongBreakFrequency: ActionCreator<SettingsAction> = (count: number) => ({
+  type: SettingsActionTypes.CHANGE_LONG_BREAK_FREQUENCY,
+  longBreakFrequency: count,
+});

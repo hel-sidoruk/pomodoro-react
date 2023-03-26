@@ -1,9 +1,10 @@
 import { SettingsAction, SettingsActionTypes, SettingsState } from '../../types/settings';
 
 const initialState: SettingsState = {
-  taskTime: 100,
-  breakTime: 5,
-  longBreakTime: 8,
+  taskTime: 180,
+  breakTime: 60,
+  longBreakTime: 120,
+  longBreakFrequency: 3,
 };
 
 export const settingsReducer = (state = initialState, action: SettingsAction) => {
@@ -14,6 +15,8 @@ export const settingsReducer = (state = initialState, action: SettingsAction) =>
       return { ...state, breakTime: action.breakTime };
     case SettingsActionTypes.CHANGE_LONG_BREAK:
       return { ...state, longBreakTime: action.longBreakTime };
+    case SettingsActionTypes.CHANGE_LONG_BREAK_FREQUENCY:
+      return { ...state, longBreakFrequency: action.longBreakFrequency };
     default:
       return state;
   }

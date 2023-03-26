@@ -4,7 +4,9 @@ import useTypedSelector from './useTypedSelector';
 
 export function useTimer() {
   const { isTaskTime, pomodoros, breaks } = useTypedSelector((state) => state.pomodoro);
-  const { taskTime, breakTime, longBreakTime } = useTypedSelector((state) => state.settings);
+  const { taskTime, breakTime, longBreakTime, longBreakFrequency } = useTypedSelector(
+    (state) => state.settings
+  );
   const { tasks } = useTypedSelector((state) => state.tasks);
 
   const [currentTime, setCurrentTime] = useState(taskTime);
@@ -17,7 +19,7 @@ export function useTimer() {
 
   const start = () => {
     setIsStarted(true);
-    setTimer(setInterval(() => tick(), 1000));
+    setTimer(setInterval(tick, 1000));
     switchProcess(true);
   };
 
@@ -33,7 +35,7 @@ export function useTimer() {
   };
 
   const startBreak = () => {
-    setCurrentTime(breaks === 3 ? longBreakTime : breakTime);
+    setCurrentTime(breaks === longBreakFrequency ? longBreakTime : breakTime);
     switchTaskTime();
     addBreak();
   };
