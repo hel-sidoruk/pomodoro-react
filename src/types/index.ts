@@ -15,6 +15,7 @@ export interface PomodoroState {
 export interface StatsState {
   workTime: number;
   pauseTime: number;
+  stops: number;
 }
 
 export interface ITask {

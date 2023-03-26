@@ -22,6 +22,10 @@
   &__block {
     background-color: $light;
     padding: 25px;
+    .red {
+      color: $red;
+      font-weight: 700;
+    }
   }
   .info {
     display: flex;

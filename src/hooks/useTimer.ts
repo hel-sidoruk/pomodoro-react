@@ -6,7 +6,7 @@ import {
   switchProcess,
   switchTaskTime,
 } from '../store/slices/pomodoroSlice';
-import { addWorkTime } from '../store/slices/statsSlice';
+import { addStop, addWorkTime } from '../store/slices/statsSlice';
 import { markAsDone } from '../store/slices/tasksSlice';
 import useTypedSelector from './useTypedSelector';
 
@@ -55,7 +55,7 @@ export function useTimer() {
     if (pomodoros === tasks.length) {
       taskAudio.play();
       pause();
-      switchProcess(false);
+      dispatch(switchProcess(false));
     } else {
       startBreak();
       start();
@@ -64,8 +64,10 @@ export function useTimer() {
 
   const reset = () => {
     pause();
-    setCurrentTime(isTaskTime ? taskTime : breakTime);
+    setCurrentTime(isTaskTime ? taskTime * 60 : breakTime * 60);
     setTimer(null);
+    dispatch(addStop());
+    dispatch(switchProcess(false));
   };
 
   const finish = () => {
