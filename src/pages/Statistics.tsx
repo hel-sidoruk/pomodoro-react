@@ -1,12 +1,18 @@
 import React from 'react';
 import { AlarmIcon, FocusIcon, StopIcon, TomatoIcon, TomatoIconSmile } from '../components/Icons';
 import { StatsDropdown } from '../components/Statistics';
+import useTypedSelector from '../hooks/useTypedSelector';
+import { getMinutesWord, getPomodoroWord } from '../utils/getWord';
 
 export const Statistics = () => {
   const focus = 4;
   const pauseTime = 5;
   const stops = 1;
-  const tomatoes = 2;
+
+  const { tasks } = useTypedSelector((state) => state.tasks);
+  const { taskTime } = useTypedSelector((state) => state.settings);
+  const doneTasks = tasks.filter((el) => el.done).length || null;
+  const workTime = doneTasks ? doneTasks * taskTime : null;
 
   return (
     <div className="stats">
@@ -19,21 +25,29 @@ export const Statistics = () => {
           <div className="stats__top">
             <div className="stats__block day">
               <h3 className="title">Суббота</h3>
-              <p>Нет данных</p>
+              {doneTasks && workTime ? (
+                `Вы работали над задачами в течении ${workTime} ${getMinutesWord(workTime)}`
+              ) : (
+                <p>Нет данных</p>
+              )}
             </div>
             <div className="stats__block chart"></div>
             <div className="stats__block tomato">
               <div className="tomato__info">
-                {tomatoes ? (
+                {doneTasks ? (
                   <>
                     <TomatoIcon />
-                    <h4 className="title">x {tomatoes}</h4>
+                    <h4 className="title">x {doneTasks}</h4>
                   </>
                 ) : (
                   <TomatoIconSmile />
                 )}
               </div>
-              {tomatoes && <div className="tomato__descr">{tomatoes} помидорa</div>}
+              {doneTasks && (
+                <div className="tomato__descr">
+                  {doneTasks} {getPomodoroWord(doneTasks)}
+                </div>
+              )}
             </div>
           </div>
           <div className="stats__bottom">

@@ -2,6 +2,7 @@ export interface ITask {
   id: string;
   text: string;
   count: number;
+  done: boolean;
 }
 export interface TasksState {
   tasks: ITask[];

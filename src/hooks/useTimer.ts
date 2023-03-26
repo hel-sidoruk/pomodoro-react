@@ -9,13 +9,14 @@ export function useTimer() {
   );
   const { tasks } = useTypedSelector((state) => state.tasks);
 
-  const [currentTime, setCurrentTime] = useState(taskTime);
+  const [currentTime, setCurrentTime] = useState(taskTime * 60);
   const [isStarted, setIsStarted] = useState(false);
   const [timer, setTimer] = useState<ReturnType<typeof setInterval> | null>(null);
 
-  const audio = new Audio('/alert.wav');
+  const taskAudio = new Audio('/alert.wav');
+  const breakAudio = new Audio('/break.mp3');
 
-  const { switchTaskTime, switchProcess, addPomodoro, addBreak } = useActions();
+  const { switchTaskTime, switchProcess, addPomodoro, addBreak, markAsDone } = useActions();
 
   const start = () => {
     setIsStarted(true);
@@ -29,13 +30,13 @@ export function useTimer() {
   };
 
   const startTask = () => {
-    setCurrentTime(taskTime);
+    setCurrentTime(taskTime * 60);
     switchTaskTime();
     addPomodoro();
   };
 
   const startBreak = () => {
-    setCurrentTime(breaks === longBreakFrequency ? longBreakTime : breakTime);
+    setCurrentTime(breaks === longBreakFrequency ? longBreakTime * 60 : breakTime * 60);
     switchTaskTime();
     addBreak();
   };
@@ -47,13 +48,20 @@ export function useTimer() {
   };
 
   const finish = () => {
-    audio.play();
+    if (isTaskTime) {
+      markAsDone(tasks[pomodoros - 1].id);
+    }
     if (pomodoros === tasks.length) {
       pause();
       switchProcess(false);
     } else {
-      if (isTaskTime) startBreak();
-      else startTask();
+      if (isTaskTime) {
+        taskAudio.play();
+        startBreak();
+      } else {
+        breakAudio.play();
+        startTask();
+      }
     }
   };
 

@@ -10,7 +10,7 @@ export const AddTaskForm = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!value) return;
-    addTask({ id: nanoid(), text: value, count: 1 });
+    addTask({ id: nanoid(), text: value, count: 1, done: false });
     setValue('');
   };
 

@@ -14,6 +14,22 @@ export const Pomodoro = () => {
   const handleTimer = () => (isStarted ? pause() : start());
   const currentTask = tasks.length ? tasks[pomodoros - 1] : null;
 
+  const isAllDone = tasks.length && tasks.filter((el) => el.done).length === tasks.length;
+
+  if (isAllDone)
+    return (
+      <div className={`pomodoro ${isInProcess ? (isTaskTime ? 'red' : 'green') : ''}`}>
+        <div className="pomodoro__header">
+          {currentTask && <span>{currentTask.text}</span>}
+          {currentTask && (
+            <span>
+              {isTaskTime ? 'Помидор' : 'Перерыв'} {isTaskTime ? pomodoros : breaks}
+            </span>
+          )}
+        </div>
+        <p className="pomodoro__default">{'Все задачи выполнены!'}</p>
+      </div>
+    );
   return (
     <div className={`pomodoro ${isInProcess ? (isTaskTime ? 'red' : 'green') : ''}`}>
       <div className="pomodoro__header">

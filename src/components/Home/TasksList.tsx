@@ -5,9 +5,10 @@ import { TaskItem } from './TaskItem';
 export const TasksList = () => {
   const [opened, setOpened] = useState<string | null>(null);
   const { tasks } = useTypedSelector((state) => state.tasks);
+  const { taskTime } = useTypedSelector((state) => state.settings);
 
   const handler = (option: string | null) => setOpened(option);
-  const total = tasks.reduce((a, b) => a + b.count, 0) * 25;
+  const total = tasks.filter((el) => !el.done).reduce((a, b) => a + b.count, 0) * taskTime;
   const hours = Math.floor(total / 60);
   const minutes = total - hours * 60;
 
@@ -22,9 +23,11 @@ export const TasksList = () => {
       {tasks.length ? (
         <>
           <ul className="tasks__list">
-            {tasks.map((task) => (
-              <TaskItem key={task.id} task={task} handler={handler} opened={opened} />
-            ))}
+            {tasks
+              .filter((el) => !el.done)
+              .map((task) => (
+                <TaskItem key={task.id} task={task} handler={handler} opened={opened} />
+              ))}
           </ul>
           <div className="tasks__time">
             {hours ? `${hours} ч ` : ''}

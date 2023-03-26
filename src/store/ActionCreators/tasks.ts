@@ -34,3 +34,12 @@ export function updateTaskText(id: string, text: string): ThunkActionType {
     dispatch({ type: TasksActionTypes.UPDATE_TASKS, payload: { tasks } });
   };
 }
+
+export function markAsDone(id: string): ThunkActionType {
+  return async (dispatch: Dispatch<TasksAction>, getState) => {
+    const { tasks } = getState().tasks;
+    const task = tasks.find((el) => el.id === id);
+    if (task) task.done = true;
+    dispatch({ type: TasksActionTypes.UPDATE_TASKS, payload: { tasks } });
+  };
+}

@@ -1,9 +1,9 @@
 import { SettingsAction, SettingsActionTypes, SettingsState } from '../../types/settings';
 
 const initialState: SettingsState = {
-  taskTime: 180,
-  breakTime: 60,
-  longBreakTime: 120,
+  taskTime: 0.2,
+  breakTime: 0.1,
+  longBreakTime: 0.15,
   longBreakFrequency: 3,
 };
 
