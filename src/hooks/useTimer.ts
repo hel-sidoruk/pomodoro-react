@@ -16,7 +16,8 @@ export function useTimer() {
   const taskAudio = new Audio('/alert.wav');
   const breakAudio = new Audio('/break.mp3');
 
-  const { switchTaskTime, switchProcess, addPomodoro, addBreak, markAsDone } = useActions();
+  const { switchTaskTime, switchProcess, addPomodoro, addBreak, markAsDone, addWorkTime } =
+    useActions();
 
   const start = () => {
     setIsStarted(true);
@@ -50,8 +51,10 @@ export function useTimer() {
   const finish = () => {
     if (isTaskTime) {
       markAsDone(tasks[pomodoros - 1].id);
+      addWorkTime(taskTime);
     }
     if (pomodoros === tasks.length) {
+      taskAudio.play();
       pause();
       switchProcess(false);
     } else {

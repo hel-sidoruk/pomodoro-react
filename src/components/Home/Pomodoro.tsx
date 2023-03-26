@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import useActions from '../../hooks/useActions';
 import { useTimer } from '../../hooks/useTimer';
 import useTypedSelector from '../../hooks/useTypedSelector';
 import { formatTime } from '../../utils/formatTime';
@@ -11,7 +12,23 @@ export const Pomodoro = () => {
     (state) => state.pomodoro
   );
 
-  const handleTimer = () => (isStarted ? pause() : start());
+  const { addPauseTime } = useActions();
+
+  const [pauseTime, setPauseTime] = useState<number | null>(null);
+
+  const handleTimer = () => {
+    if (!isStarted && !isInProcess) {
+      start();
+      return;
+    }
+    if (isStarted) {
+      pause();
+      setPauseTime(Date.now());
+    } else {
+      start();
+      if (pauseTime) addPauseTime(Math.floor((Date.now() - pauseTime) / 1000));
+    }
+  };
   const currentTask = tasks.length ? tasks[pomodoros - 1] : null;
 
   const isAllDone = tasks.length && tasks.filter((el) => el.done).length === tasks.length;

@@ -2,17 +2,16 @@ import React from 'react';
 import { AlarmIcon, FocusIcon, StopIcon, TomatoIcon, TomatoIconSmile } from '../components/Icons';
 import { StatsDropdown } from '../components/Statistics';
 import useTypedSelector from '../hooks/useTypedSelector';
+import { getDay } from '../utils/getDay';
 import { getMinutesWord, getPomodoroWord } from '../utils/getWord';
 
 export const Statistics = () => {
   const focus = 4;
-  const pauseTime = 5;
   const stops = 1;
 
   const { tasks } = useTypedSelector((state) => state.tasks);
-  const { taskTime } = useTypedSelector((state) => state.settings);
+  const { workTime, pauseTime } = useTypedSelector((state) => state.stats);
   const doneTasks = tasks.filter((el) => el.done).length || null;
-  const workTime = doneTasks ? doneTasks * taskTime : null;
 
   return (
     <div className="stats">
@@ -24,7 +23,7 @@ export const Statistics = () => {
         <div className="stats__body">
           <div className="stats__top">
             <div className="stats__block day">
-              <h3 className="title">Суббота</h3>
+              <h3 className="title">{getDay()}</h3>
               {doneTasks && workTime ? (
                 `Вы работали над задачами в течении ${workTime} ${getMinutesWord(workTime)}`
               ) : (
@@ -67,7 +66,7 @@ export const Statistics = () => {
             >
               <div>
                 <h3 className="title">Время на паузе</h3>
-                <p className="info__stats">{pauseTime}м</p>
+                <p className="info__stats">{(pauseTime / 60).toFixed(1)}м</p>
               </div>
               <AlarmIcon fill={pauseTime ? '#9C97D7' : ''} />
             </div>

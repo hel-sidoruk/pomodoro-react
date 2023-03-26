@@ -7,8 +7,10 @@ export const TasksList = () => {
   const { tasks } = useTypedSelector((state) => state.tasks);
   const { taskTime } = useTypedSelector((state) => state.settings);
 
+  const todoTasks = tasks.filter((el) => !el.done);
+
   const handler = (option: string | null) => setOpened(option);
-  const total = tasks.filter((el) => !el.done).reduce((a, b) => a + b.count, 0) * taskTime;
+  const total = todoTasks.reduce((a, b) => a + b.count, 0) * taskTime;
   const hours = Math.floor(total / 60);
   const minutes = total - hours * 60;
 
@@ -20,14 +22,12 @@ export const TasksList = () => {
 
   return (
     <div className="tasks">
-      {tasks.length ? (
+      {todoTasks.length ? (
         <>
           <ul className="tasks__list">
-            {tasks
-              .filter((el) => !el.done)
-              .map((task) => (
-                <TaskItem key={task.id} task={task} handler={handler} opened={opened} />
-              ))}
+            {todoTasks.map((task) => (
+              <TaskItem key={task.id} task={task} handler={handler} opened={opened} />
+            ))}
           </ul>
           <div className="tasks__time">
             {hours ? `${hours} ч ` : ''}
