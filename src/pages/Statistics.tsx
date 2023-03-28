@@ -2,7 +2,6 @@ import React from 'react';
 import * as StatsComponents from '../components/Statistics';
 
 export const Statistics = () => {
-  const data = [1, 5, 3, 4, 2, 3, 6];
   return (
     <div className="stats">
       <div className="container">
@@ -14,7 +13,7 @@ export const Statistics = () => {
           <div className="stats__top">
             <StatsComponents.WorkInfoBlock />
             <div className="stats__block chart">
-              <StatsComponents.BarChart data={data} />
+              <StatsComponents.BarChart />
             </div>
             <StatsComponents.PomodorosBlock />
           </div>

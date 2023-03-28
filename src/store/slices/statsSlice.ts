@@ -6,6 +6,7 @@ const initialState: StatsState = {
   workTime: 0,
   pauseTime: 0,
   stops: 0,
+  weeksAgo: 0,
 };
 
 export const statsSlice = createSlice({
@@ -21,9 +22,12 @@ export const statsSlice = createSlice({
     addStop: (state) => {
       state.stops += 1;
     },
+    changePeriod: (state, action: PayloadAction<number>) => {
+      state.weeksAgo = action.payload;
+    },
   },
 });
 
-export const { addWorkTime, addPauseTime, addStop } = statsSlice.actions;
+export const { addWorkTime, addPauseTime, addStop, changePeriod } = statsSlice.actions;
 
 export default statsSlice.reducer;

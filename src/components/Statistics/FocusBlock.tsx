@@ -1,8 +1,12 @@
 import React from 'react';
+import useTypedSelector from '../../hooks/useTypedSelector';
 import { FocusIcon } from '../Icons';
 
 export const FocusBlock = () => {
-  const focus = 4;
+  const { workTime, pauseTime } = useTypedSelector((state) => state.stats);
+
+  const total = workTime + pauseTime;
+  const focus = workTime ? total / workTime : 0;
 
   return (
     <div className="stats__block info" style={{ background: focus ? '#FFDDA9' : '#f4f4f4' }}>

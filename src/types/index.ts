@@ -16,6 +16,7 @@ export interface StatsState {
   workTime: number;
   pauseTime: number;
   stops: number;
+  weeksAgo: number;
 }
 
 export interface ITask {
