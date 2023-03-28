@@ -17,6 +17,7 @@ export interface StatsState {
   pauseTime: number;
   stops: number;
   weeksAgo: number;
+  workTimeStats: IWorkStats;
 }
 
 export interface ITask {
@@ -28,3 +29,5 @@ export interface ITask {
 export interface TasksState {
   tasks: ITask[];
 }
+
+export type IWorkStats = { date: number; workTime: number }[];
