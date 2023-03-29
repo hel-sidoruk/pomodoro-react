@@ -14,7 +14,6 @@ export const BarChart = () => {
 
   const [from, to] = [(weeksAgo + 1) * 7, weeksAgo * 7];
 
-  console.log(workTimeStats);
   const filterByPeriod = ({ date }: { date: number }) =>
     date > getDayFromNow(from).getTime() && date <= getDayFromNow(to).getTime();
 

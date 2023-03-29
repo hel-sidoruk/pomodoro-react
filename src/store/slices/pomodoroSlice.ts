@@ -25,9 +25,16 @@ export const pomodoroSlice = createSlice({
     addBreak: (state) => {
       state.breaks += 1;
     },
+    resetPomodoro: (state) => {
+      state.pomodoros = 1;
+      state.breaks = 0;
+      state.isInProcess = false;
+      state.isTaskTime = true;
+    },
   },
 });
 
-export const { switchTaskTime, switchProcess, addPomodoro, addBreak } = pomodoroSlice.actions;
+export const { switchTaskTime, switchProcess, addPomodoro, addBreak, resetPomodoro } =
+  pomodoroSlice.actions;
 
 export default pomodoroSlice.reducer;

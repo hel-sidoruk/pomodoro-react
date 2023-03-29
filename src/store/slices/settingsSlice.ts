@@ -3,9 +3,9 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { SettingsState } from '../../types';
 
 const initialState: SettingsState = {
-  taskTime: 0.2,
-  breakTime: 0.1,
-  longBreakTime: 0.15,
+  taskTime: 25,
+  breakTime: 5,
+  longBreakTime: 15,
   longBreakFrequency: 3,
 };
 

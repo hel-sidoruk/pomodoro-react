@@ -18,6 +18,10 @@ export const StatsDropdown = () => {
   const close = () => setIsActive(false);
 
   useEffect(() => {
+    dispatch(changePeriod(0));
+  }, []);
+
+  useEffect(() => {
     document.body.addEventListener('click', close);
     return () => document.body.removeEventListener('click', close);
   }, []);

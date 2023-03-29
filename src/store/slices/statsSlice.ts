@@ -38,10 +38,15 @@ export const statsSlice = createSlice({
     restoreStats: (state, action: PayloadAction<IWorkStats>) => {
       state.workTimeStats = action.payload;
     },
+    resetStats: (state) => {
+      state.workTime = 0;
+      state.pauseTime = 0;
+      state.stops = 0;
+    },
   },
 });
 
-export const { addWorkTime, addPauseTime, addStop, changePeriod, restoreStats } =
+export const { addWorkTime, addPauseTime, addStop, changePeriod, restoreStats, resetStats } =
   statsSlice.actions;
 
 export default statsSlice.reducer;

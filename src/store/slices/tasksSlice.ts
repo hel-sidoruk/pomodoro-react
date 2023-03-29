@@ -18,19 +18,29 @@ export const tasksSlice = createSlice({
     },
     editTaskTime: (state, action: PayloadAction<{ id: string; time: number }>) => {
       const task = state.tasks.find((el) => el.id === action.payload.id);
-      if (task) task.count = action.payload.time;
+      if (task) {
+        task.count = action.payload.time;
+      }
     },
     updateTaskText: (state, action: PayloadAction<{ id: string; text: string }>) => {
       const task = state.tasks.find((el) => el.id === action.payload.id);
-      if (task) task.text = action.payload.text;
+      if (task) {
+        task.text = action.payload.text;
+      }
     },
     markAsDone: (state, action: PayloadAction<{ id: string }>) => {
       const task = state.tasks.find((el) => el.id === action.payload.id);
-      if (task) task.done = true;
+      if (task) {
+        task.done = true;
+      }
+    },
+    resetTasks: (state) => {
+      state.tasks = [];
     },
   },
 });
 
-export const { addTask, deleteTask, editTaskTime, updateTaskText, markAsDone } = tasksSlice.actions;
+export const { addTask, deleteTask, editTaskTime, updateTaskText, markAsDone, resetTasks } =
+  tasksSlice.actions;
 
 export default tasksSlice.reducer;
