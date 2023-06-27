@@ -7,11 +7,18 @@ import {
   changeTaskTime,
 } from '../store/slices/settingsSlice';
 import { SettingsControl } from '../components/Settings/SettingsControl';
+import { useAppDispatch } from '../store';
+import { changeTheme } from '../store/slices/themeReducer';
+import { MoonIcon, SunIcon } from '../components/Icons';
 
 export const Settings = () => {
   const { taskTime, breakTime, longBreakFrequency, longBreakTime } = useTypedSelector(
     (state) => state.settings
   );
+  const { theme } = useTypedSelector((state) => state.theme);
+
+  const dispatch = useAppDispatch();
+  const toggle = () => dispatch(changeTheme(theme === 'dark' ? 'light' : 'dark'));
 
   return (
     <div className="settings">
@@ -37,6 +44,13 @@ export const Settings = () => {
               changeFn={changeLongBreakFrequency}
               isBreaksControl
             />
+          </div>
+          <div className="settings__field">
+            <h3 className="settings__subtitle">Темная тема:</h3>
+            <button className={`settings__toggle ${theme}`} onClick={toggle}>
+              <SunIcon />
+              <MoonIcon />
+            </button>
           </div>
         </div>
       </div>

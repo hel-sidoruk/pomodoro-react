@@ -11,6 +11,7 @@ $smoke: #C4C4C4;
 body.light {
   --contrast: #fff;
   --smoke: #C4C4C4;
+  --contrast-invert: #141414;
   --light: #f4f4f4;
   color: #333;
   background-color: #fff;
@@ -21,6 +22,7 @@ body.light {
 
 body.dark {
   --contrast: #141414;
+  --contrast-invert: #fff;
   --smoke: #555;
   --light: #777;
   background-color: #141414;
