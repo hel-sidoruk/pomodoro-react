@@ -18,16 +18,19 @@ export const TasksDropdown = ({ task, isOpened, handler, edit }: Props) => {
   const dispatch = useAppDispatch();
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    // if (isOpened) {
-    //   setIsUpper(false);
-    // }
     if (!isOpened) {
       setIsUpper(window.innerHeight - e.clientY < 170);
     }
     handler(isOpened ? null : task.id);
   };
-  const increase = () => dispatch(editTaskTime({ id: task.id, time: task.count + 1 }));
-  const decrease = () => dispatch(editTaskTime({ id: task.id, time: task.count - 1 }));
+  const increase = (e: React.MouseEvent<HTMLLIElement>) => {
+    e.stopPropagation();
+    dispatch(editTaskTime({ id: task.id, time: task.count + 1 }));
+  };
+  const decrease = (e: React.MouseEvent<HTMLLIElement>) => {
+    e.stopPropagation();
+    dispatch(editTaskTime({ id: task.id, time: task.count - 1 }));
+  };
 
   return (
     <div className="tasks__dropdown">
