@@ -54,7 +54,7 @@
     top: calc(100% + 5px);
     left: -70px;
     color: $grey;
-    background-color: #fff;
+    background-color: var(--contrast);
     border: 1px solid $smoke;
     padding: 6px 0;
     opacity: 0;

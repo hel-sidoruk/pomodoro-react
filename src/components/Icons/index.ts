@@ -11,3 +11,5 @@ export * from './AlarmIcon';
 export * from './StopIcon';
 export * from './ArrowIcon';
 export * from './CrossIcon';
+export * from './SunIcon';
+export * from './MoonIcon';

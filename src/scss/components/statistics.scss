@@ -20,16 +20,20 @@
     min-height: 180px;
   }
   &__block {
-    background-color: $light;
+    background-color: var(--light);
     padding: 25px;
     .red {
       color: $red;
       font-weight: 700;
     }
+    &.chart {
+      background-color: $light;
+    }
   }
   .info {
     display: flex;
     justify-content: space-between;
+    color: #333;
     &__stats {
       font-size: 64px;
       line-height: 76px;
@@ -72,15 +76,16 @@
   width: 100%;
   position: relative;
   &__top {
-    background-color: $light;
+    background-color: var(--light);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 19px 15px;
     cursor: pointer;
-    transition: background-color .3s ease-in-out;
+    transition: all .3s ease-in-out;
     &:hover {
       background-color: darken($light, 10%);
+      color: #333;
     }
     svg {
       transition: transform .3s ease-in-out;
@@ -91,15 +96,16 @@
     display: none;
     width: 100%;
     left: 0;
-    background-color: $light;
+    background-color: var(--light);
   }
   &__item {
     padding: 19px 15px;
     cursor: pointer;
-    transition: background-color .3s ease-in-out;
+    transition: all .3s ease-in-out;
     border-top: 1px solid #DEDEDE;
     &:hover {
       background-color: darken($light, 10%);
+      color: #333;
     }
   }
   &.active {

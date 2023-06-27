@@ -1,7 +1,8 @@
 .pomodoro {
-  background-color: $light;
+  background-color: var(--light);
   flex-grow: 1;
   max-height: 510px;
+  transition: background-color .2s ease-in-out;
   &__default {
     margin: auto;
     font-size: 24px;
@@ -12,7 +13,7 @@
     top: 36%;
   }
   &__header {
-    background-color: $smoke;
+    background-color: var(--smoke);
     padding: 19px 40px;
     color: #fff;
     display: flex;

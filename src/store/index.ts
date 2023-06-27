@@ -7,6 +7,7 @@ import pomodoroReducer from './slices/pomodoroSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
+import themeReducer from './slices/themeReducer';
 
 const persistConfig = {
   key: 'appState',
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   stats: statsReducer,
   settings: settingsReducer,
   pomodoro: pomodoroReducer,
+  theme: themeReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

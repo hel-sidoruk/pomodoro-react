@@ -6,9 +6,11 @@ import { resetTasks } from '../store/slices/tasksSlice';
 import { localStorageKey } from '../utils/constants';
 import { getInitialStats } from '../utils/getInitialStats';
 import { Header } from './Header';
+import useTypedSelector from '../hooks/useTypedSelector';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
+  const { theme } = useTypedSelector((state) => state.theme);
 
   useEffect(() => {
     const { initialStats, isToday } = getInitialStats();
@@ -22,6 +24,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     dispatch(restoreStats(initialStats));
     localStorage.setItem(localStorageKey, JSON.stringify(initialStats));
   }, []);
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   return (
     <>
