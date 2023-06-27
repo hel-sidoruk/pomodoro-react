@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../../store';
 import { editTaskTime } from '../../store/slices/tasksSlice';
 import { ITask } from '../../types';
@@ -13,9 +13,17 @@ interface Props {
 }
 
 export const TasksDropdown = ({ task, isOpened, handler, edit }: Props) => {
+  const [isUpper, setIsUpper] = useState(false);
+
   const dispatch = useAppDispatch();
   const toggleDropdown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    // if (isOpened) {
+    //   setIsUpper(false);
+    // }
+    if (!isOpened) {
+      setIsUpper(window.innerHeight - e.clientY < 170);
+    }
     handler(isOpened ? null : task.id);
   };
   const increase = () => dispatch(editTaskTime({ id: task.id, time: task.count + 1 }));
@@ -26,7 +34,11 @@ export const TasksDropdown = ({ task, isOpened, handler, edit }: Props) => {
       <button className={`tasks__button ${isOpened ? 'active' : ''}`} onClick={toggleDropdown}>
         Опции
       </button>
-      <ul className={`tasks__dropdown-list ${isOpened ? 'active' : ''}`}>
+      <ul
+        className={`tasks__dropdown-list ${isOpened ? 'active' : ''} ${
+          isOpened && isUpper ? 'upper' : ''
+        }`}
+      >
         <li className="tasks__dropdown-item" onClick={increase}>
           <Icons.PlusIcon /> Увеличить
         </li>
