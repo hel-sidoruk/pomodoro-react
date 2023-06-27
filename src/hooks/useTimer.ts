@@ -91,7 +91,9 @@ export function useTimer() {
   };
 
   useEffect(() => {
-    if (!currentTime) finish();
+    if (!currentTime) {
+      finish();
+    }
   }, [currentTime]);
 
   const tick = () => {

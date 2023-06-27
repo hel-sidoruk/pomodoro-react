@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch } from '../../store';
 import { editTaskTime } from '../../store/slices/tasksSlice';
-import { ITask } from '../../types/task';
+import { ITask } from '../../types';
 import * as Icons from '../Icons';
 import { DeleteTaskButton } from './DeleteTaskButton';
 

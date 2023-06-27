@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useActions from '../../hooks/useActions';
 import { useAppDispatch } from '../../store';
 import { updateTaskText } from '../../store/slices/tasksSlice';
-import { ITask } from '../../types/task';
+import { ITask } from '../../types';
 import { TasksDropdown } from './TasksDropdown';
 
 interface Props {

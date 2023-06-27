@@ -10,7 +10,9 @@ export const AddTaskForm = () => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!value) return;
+    if (!value) {
+      return;
+    }
     dispatch(addTask({ id: nanoid(), text: value, count: 1, done: false }));
     setValue('');
   };

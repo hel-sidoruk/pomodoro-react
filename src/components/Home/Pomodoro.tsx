@@ -27,20 +27,23 @@ export const Pomodoro = () => {
       setPauseTime(Date.now());
     } else {
       start();
-      if (pauseTime) dispatch(addPauseTime(Math.floor((Date.now() - pauseTime) / 1000)));
+      if (pauseTime) {
+        dispatch(addPauseTime(Math.floor((Date.now() - pauseTime) / 1000)));
+      }
     }
   };
   const currentTask = tasks.length ? tasks[pomodoros - 1] : null;
 
   const isAllDone = tasks.length && tasks.filter((el) => el.done).length === tasks.length;
 
-  if (isAllDone)
+  if (isAllDone) {
     return (
       <div className={`pomodoro ${isInProcess ? (isTaskTime ? 'red' : 'green') : ''}`}>
         <div className="pomodoro__header"></div>
         <p className="pomodoro__default">{'Все задачи выполнены!'}</p>
       </div>
     );
+  }
   return (
     <div className={`pomodoro ${isInProcess ? (isTaskTime ? 'red' : 'green') : ''}`}>
       <div className="pomodoro__header">
