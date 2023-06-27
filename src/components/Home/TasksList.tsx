@@ -31,7 +31,7 @@ export const TasksList = () => {
           </ul>
           <div className="tasks__time">
             {hours ? `${hours} ч ` : ''}
-            {minutes} мин
+            {minutes ? `${minutes} мин` : ''}
           </div>
         </>
       ) : null}

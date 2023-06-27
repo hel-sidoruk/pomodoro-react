@@ -3,4 +3,34 @@
   .title {
     margin-bottom: 25px;
   }
+  &__subtitle {
+    margin-bottom: 15px;
+  }
+  &__field {
+    margin-bottom: 30px;
+  }
+  &__value {
+    margin: 0 20px;
+    font-size: 32px;
+  }
+  &__control {
+    display: inline-flex;
+    align-items: center;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+    span:last-child {
+      margin-left: 12px;
+    }
+  }
+  &__btn {
+    transition: all 0.2s ease-in-out;
+    &:active {
+      transform: scale(0.9);
+    }
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }
